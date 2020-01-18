@@ -3,6 +3,7 @@ layout: post
 title:  "My preferred git workflow for small teams"
 date:   2020-01-18 16:30:00 -0400
 categories: blog
+tags: git collaboration teams opinion
 ---
 
 git has many useful features for tracking collaborative changes. Two common patterns for using git collaboratively are 
