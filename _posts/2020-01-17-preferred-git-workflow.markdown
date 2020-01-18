@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "My preferred git workflow for small teams"
-date:   2020-01-23 15:00:00 -0400
+date:   2020-01-18 16:30:00 -0400
 categories: blog
 ---
 
