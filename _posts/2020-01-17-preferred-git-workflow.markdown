@@ -67,9 +67,50 @@ git push origin issue-349
 
 When you're finished working on the issue, you can make a pull/merge request on Github or GitLab to merge `issue-349` on `YourName/OurProject` to `develop` on `TeamName/OurProject`, which can be merged after your team's code review, CI, etc. procedures.
 
-## Getting back up to date with rebase
+## Getting back up to date
 
-If you're still working on your new branch and changes have been made to `upstream/develop` since you started working, you can bring in the changes to your current branch with `git rebase`. The most straightforward way to do this is to
+If you're still working on your new branch and changes have been made to `upstream/develop` since you started working, there are a couple of different ways you can bring in the changes to your current branch. 
+
+### Merge (Preferred)
+
+The safest, and most straightforward way to get up-to-date before creating a pull request is to merge your changes with the upstream source. This method will create a commit that merges the upstream changes that you missed with the changes that you created. You can do this with
+
+```
+git merge upstream/develop
+```
+
+Note that you may need to resolve merge conflicts.
+
+To illustrate `git merge`, say that you created a new branch on commit `C` and added commits `G`, `H`, and `I`. In the meantime, another developer added `D`, `E`, and `F` to develop. 
+
+```
+upstream/develop
+                  *
+          D---E---F
+         /
+A---B---C
+         \
+          G---H---I
+                  *
+local/feature-branch
+```
+
+You can merge the upstream changes with yours to create a commit `K` that can be added on top of develop.
+
+```
+upstream/develop
+                  *
+          D---E---F
+         /         \
+A---B---C           K
+         \         / *
+          G---H---I
+local/feature-branch
+```
+
+### Rebase (Pretty, but dangerous!)
+
+Rebasing your changes onto develop keeps the commit history linear, which is handy if there's a reason to keep the commit history tidy and readable. However, this requires force-pushing, which can be dangerous and can cause you to lose data. To perform a rebase:
 
 1. Make sure your version of develop is up-to-date. If not, do
 ```
@@ -86,3 +127,27 @@ git rebase develop
 4. Your branch is now up-to-date and only includes forward changes from `upstream/develop`, so you don't have to worry about existing conflicts. If you've previously pushed changes before rebasing, keep in mind that you will either have to create a new branch, or (very carefully) force push.
 
 Note `git rebase` is super powerful, and it can be helpful to look at the [official documentation](https://git-scm.com/docs/git-rebase) to learn more about what you can do with it.
+
+To illustrate rebase, we'll use the previous example
+
+```
+upstream/develop
+                  *
+          D---E---F
+         /
+A---B---C
+         \
+          G---H---I
+                  *
+local/feature-branch
+```
+
+As you run rebase, you may have to resolve merge conflicts. Afterwards, your commit history will look like this: 
+
+```
+upstream/develop
+                    *    
+A---B---C---D---E---F---G---H---I
+                                *
+local/feature-branch
+```
