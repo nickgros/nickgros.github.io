@@ -13,6 +13,8 @@ git has many useful features for tracking collaborative changes. Two common patt
 
 My experience is primarily with the first case, and I'd like to outline a few guidelines for managing changes for this central repository scheme. Many teams miss an opportunity to maintain a pattern of organization and labelling that can save you headaches down the line. It also limits the amount of complicated merges you have to make, and provides additional tracability with whichever issue tracker you use.
 
+This methodology (which I did not come up with) is based on the very-popular [git-flow](https://nvie.com/posts/a-successful-git-branching-model/), which is probably overkill for the needs of your team, depending on your software development lifecycle.
+
 # Fork and modify your own copy of the repository
 
 In this article, I'll explain the workflow we used at one of my internships. I'll assume you have a basic understanding of what the git model looks like (i.e. what branches are, how to check out branches, fetch, push, and pull changes from the command line). I'll refer to the branch where we would like to push changes as `develop`. The repository name will be `TeamName/OurProject`.
